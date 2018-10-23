@@ -5,6 +5,8 @@ import IndexAdmin from '@/pageadmin/index'
 import Content from '@/page/content'
 import Login from '@/pageadmin/login'
 import ArticleForm from '@/components/articleform'
+import ContentCard from '@/components/contentcard'
+
 
 Vue.use(Router)
 
@@ -34,6 +36,16 @@ export default new Router({
       path: '/articleform',
       name: 'ArticleForm',
       component: ArticleForm
+    },
+    {
+      path: '/contentcard',
+      name: 'ContentCard',
+      component: ContentCard
+    },
+    {
+      path: '/content/:id',
+      name: 'Content',
+      component: Content
     }
   ]
 })
