@@ -52,7 +52,7 @@
         count: [0, 1, 2],
         modal1: false,
         formItem: {
-          content:'',
+          content:'[s-start]<br>something<br>[s-end]',
           title: '',
           class: '',
           display: 'male',

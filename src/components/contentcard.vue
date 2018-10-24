@@ -2,10 +2,12 @@
   <div>
     <Card class="card" dis-hover v-for="(item, index) in list1" :key="index">
       <h5><router-link :to="'/content/' + item.id">{{ item.title }}</router-link></h5>
-      <p>{{ item.summary }}</p>
-      {{ item.date }}
-      {{ item.replyNum }}
-      {{ item.clickNum }}
+      <p class="time"> <Icon type="md-calendar" size="16"/> &nbsp;{{ item.date }}</p>
+      <div class="content" v-html="item.summary"></div>
+      <div class="sub">
+        <div class="left"><router-link :to="'/content/' + item.id"><Icon type="ios-heart" size="16"/></router-link>&nbsp;{{ item.agreeNum }}</div>
+        <div class="right"><Icon type="md-thermometer" />&nbsp;{{ item.replyNum }}℃&nbsp;&nbsp;<router-link :to="'/content/' + item.id"><Icon type="md-text" />&nbsp;{{ item.clickNum }}&nbsp;Replies</router-link></div>
+      </div>
     </Card>
   </div>
 </template>
@@ -60,8 +62,64 @@
 
 <style scoped>
   .card{
+    border: 0px;
     width: 960px;
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 100px;
+  }
+  .card h5 a{
+    font-size: 4em;
+    font-family: 宋体;
+    font-weight:normal;
+    color: #555555;
+  }
+  .card a:hover{
+    color: #fd6262;
+  }
+  .time{
+    line-height: 10px;
+    color: #999999;
+    height: 110px;
+    padding: 25px 0;
+  }
+  .content{
+    color: #333333;
+    font-size: 1.3em;
+    line-height:2em;
+  }
+  .content p {
+    margin-top: 10px;
+  }
+  .content img{
+    border-radius: 5px;
+  }
+  .sub{
+    overflow: auto;
+  }
+  .left{
+    width: 50%;
+    float: left;
+  }
+  .right{
+    width: 50%;
+    float: left;
+    text-align: right;
+    padding-right:20px;
+  }
+  .left a{
+    color: #a7a7a7;
+  }
+  .right a{
+    color: #797979;
+  }
+  @media screen and (max-width: 768px){
+    .card {
+      width: 99%;
+    }
+  }
+  @media screen and (min-width: 480px){
+    .card h5 a{
+      font-size: 3em;
+    }
   }
 </style>

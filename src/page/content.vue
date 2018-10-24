@@ -1,29 +1,19 @@
 <template>
-  <div v-html="article.content"></div>
+  <div>
+    <Header></Header>
+    <Detail></Detail>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
-    export default {
-      name: "Content",
-      data () {
-        return {
-          id: this.$route.params.id,
-          article: {}
-        }
-      },
-      created () {
-        this.getData()
-      },
-      methods: {
-        getData () {
-          this.$api.get('article/content/' + this.id, null, r => {
-            this.article = r.resData
-            console.log(this.article)
-          })
-        }
-      }
-    }
-
+  import Detail from '../components/detail.vue'
+  import Header from '../components/header.vue'
+  import Footer from '../components/footer.vue'
+  export default {
+    components: {Header, Footer, Detail},
+    name: "Content",
+  }
 </script>
 
 <style scoped>
