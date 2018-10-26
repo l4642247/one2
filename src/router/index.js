@@ -5,7 +5,10 @@ import IndexAdmin from '@/pageadmin/index'
 import Content from '@/page/content'
 import Login from '@/pageadmin/login'
 import ArticleForm from '@/components/articleform'
+import ArticleEdit from '@/components/articleedit'
 import ContentCard from '@/components/contentcard'
+import Admin from '@/page/admin'
+
 
 
 Vue.use(Router)
@@ -46,6 +49,23 @@ export default new Router({
       path: '/content/:id',
       name: 'Content',
       component: Content
+    },
+    {
+      path: '/55148917',
+      name: 'Admin',
+      component: Admin,
+      children:[
+        {
+          path: 'page1',
+          name: 'ArticleForm',
+          component: ArticleForm
+        },
+        {
+          path: 'page2',
+          name: 'ArticleEdit',
+          component: ArticleEdit
+        },
+      ]
     }
   ]
 })

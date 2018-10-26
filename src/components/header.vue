@@ -1,11 +1,11 @@
 <template>
     <div class="header">
       <div class="notice">
-        <h1>夜枫</h1>
+        <h1><router-link :to="'/'">独白</router-link></h1>
         <ul>
-          <li><router-link :to="'/content/'"><Icon type="ios-alert-outline" size="14"/>&nbsp;关于</router-link></li>
-          <li><router-link :to="'/content/'"><Icon type="md-clipboard" size="14"/>&nbsp;留言</router-link></li>
-          <li><router-link :to="'/content/'"><Icon type="ios-link" size="14"/>&nbsp;友链</router-link></li>
+          <li><router-link :to="'/'"><Icon type="ios-alert-outline" size="14"/>&nbsp;关于</router-link></li>
+          <li><router-link :to="'/'"><Icon type="md-clipboard" size="14"/>&nbsp;留言</router-link></li>
+          <li><router-link :to="'/'"><Icon type="ios-link" size="14"/>&nbsp;友链</router-link></li>
         </ul>
       </div>
     </div>
@@ -28,6 +28,12 @@
     text-align: center;
     font-family: 华文楷体;
     font-size: 250%;
+  }
+  .header h1 a{
+    color: #515a6e;
+  }
+  .header h1 a:hover{
+    color: #fd6262;
   }
   .header ul{
     display:table;
@@ -64,7 +70,7 @@
       overflow: auto;
       height: 100%;
       margin: 0 auto;
-      padding: 0px 20px 0px 10px;
+      padding: 0px 20px 0px 15px;
     }
     .header h1{
       width: 50%;

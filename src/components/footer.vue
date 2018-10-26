@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-      <p>© 2011-2018. 夜枫. <span class="show">All Rights Reserved. Lovingly made by yefengs.</span> 青ICP备23214342-2</p>
+      <p>© 2018-2021. 独白. <span class="show">All Rights Reserved. Lovingly made by yefengs.</span> 湘ICP备15006988号-1</p>
     </div>
 </template>
 

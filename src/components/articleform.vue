@@ -1,4 +1,5 @@
 <template>
+  <div class="articleForm">
     <Form :model="formItem" :label-width="40">
       <FormItem label="标题">
         <Input v-model="formItem.title" placeholder="Enter something..."></Input>
@@ -33,11 +34,13 @@
         <p>You really wanna to submit?</p>
       </Modal>
     </Form>
-
+  </div>
 </template>
 
 <style scoped>
-
+  .articleForm{
+    padding: 40px 20px;
+  }
 </style>
 
 <script>
