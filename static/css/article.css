@@ -30,7 +30,6 @@
 >>> .content p {
   margin-top: 15px;
   line-height: 1.5em;
-  text-indent: 2em;
 }
 >>> .content img{
   border-radius: 5px;

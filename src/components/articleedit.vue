@@ -1,15 +1,6 @@
 <template>
   <div>
     <Table border :columns="columns7" :data="data6"></Table>
-    <Modal
-      v-model="modal1"
-      title="Common Modal dialog box title"
-      @on-ok="ok"
-      @on-cancel="cancel">
-      <p>Content of dialog</p>
-      <p>Content of dialog</p>
-      <p>Content of dialog</p>
-    </Modal>
   </div>
 </template>
 <script>
@@ -35,12 +26,15 @@
               return h('div', [
                 h('Icon', {
                   props: {
-                    type: 'person'
                   }
                 }),
                 h('strong', params.row.title)
               ]);
             }
+          },
+          {
+            title: '编号',
+            key: 'id'
           },
           {
             title: '浏览量',
@@ -67,7 +61,7 @@
                   },
                   on: {
                     click: () => {
-                      //this.show(params.index)
+                      this.edit(params.row.id)
                     }
                   }
                 }, 'View'),
@@ -78,7 +72,7 @@
                   },
                   on: {
                     click: () => {
-                      this.modal1 = true
+                      this.delData(params.row.id)
                       this.remove(params.index)
                     }
                   }
@@ -94,11 +88,8 @@
       this.getData();
     },
     methods: {
-      show (index) {
-        this.$Modal.info({
-          title: 'User Info',
-          content: `Name：${this.data6[index].name}<br>Age：${this.data6[index].age}<br>Address：${this.data6[index].address}`
-        })
+      edit (index) {
+        this.$router.push({path:'/55148917/page1', query:{id: index} })
       },
       remove (index) {
         this.data6.splice(index, 1);
@@ -109,11 +100,10 @@
           this.count = r.count
         })
       },
-      ok () {
-        this.$Message.info('Clicked ok');
-      },
-      cancel () {
-        this.$Message.info('Clicked cancel');
+      delData (id) {
+        this.$api.get('article/delete/' + id, null, r => {
+          alert(r.resCode)
+        })
       }
     }
   }

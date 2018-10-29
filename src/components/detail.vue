@@ -27,6 +27,9 @@
       methods: {
         getData () {
           this.$api.get('article/content/' + this.id, null, r => {
+            alert(r.resData.content)
+            r.resData.content = r.resData.content.replace('<p>[s-start]</p>','')
+            r.resData.content = r.resData.content.replace('<p>[s-end]</p>','')
             this.article = r.resData
             console.log(this.article)
           })

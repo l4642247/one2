@@ -5,7 +5,7 @@
         <Input v-model="formItem.title" placeholder="Enter something..."></Input>
       </FormItem>
       <FormItem label="内容">
-        <textarea  v-model="formItem.content" id="editor" placeholder="Enter something..."></textarea>
+        <textarea  v-model="formItem.content" id="editor"></textarea>
       </FormItem>
       <FormItem label="分类">
         <Select v-model="formItem.class">
@@ -50,6 +50,7 @@
     name:'ArticleForm',
     data () {
       return {
+        artid : this.$route.query.id,
         editor:'',
         list:[],
         count: [0, 1, 2],
@@ -77,6 +78,7 @@
           'fontScale','color','ol','ul','blockquote','code',
           'table','link','image','hr','indent','outdent','alignment']
       });
+      this.getArtData();
       this.getData();
     },
     methods: {
@@ -98,9 +100,13 @@
         var content = this.editor.getValue();
         var title = this.formItem.title;
         var type = this.formItem.class;
-        this.$Message.info(content + '  ' + title + '' + type);
+        this.$Message.info(title + '' + type);
 
         var params = new URLSearchParams();
+        if(typeof this.artid == 'undefined'){
+          this.artid = 0;
+        }
+        params.append('id',this.artid);
         params.append('content', content);
         params.append('title', title);
         params.append('type', type);
@@ -114,6 +120,14 @@
         this.$api.get('class/all', null, r => {
           this.list = r.resData
         })
+      },
+      getArtData () {
+        if(typeof this.artid != 'undefined') {
+          this.$api.get('article/content/' + this.artid, null, r => {
+            this.formItem.title = r.resData.title
+            this.editor.setValue(r.resData.content);
+          })
+        }
       }
     }
   }
