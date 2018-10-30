@@ -40,15 +40,20 @@
   <div class="layout">
     <Layout>
       <Sider breakpoint="md" collapsible :collapsed-width="78" v-model="isCollapsed">
+
         <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
-          <MenuItem name="1-1">
-            <Icon type="ios-navigate"></Icon>
-            <span>写文章</span>
-          </MenuItem>
-          <MenuItem name="1-2">
-            <Icon type="ios-search"></Icon>
-            <span>文章管理</span>
-          </MenuItem>
+          <router-link to="/55148917/page1">
+            <MenuItem name="1-1">
+                <Icon type="ios-navigate"></Icon>
+                <span>写文章</span>
+            </MenuItem>
+          </router-link>
+          <router-link to="/55148917/page2">
+            <MenuItem name="1-2">
+                <Icon type="ios-search"></Icon>
+                <span>文章管理</span>
+            </MenuItem>
+          </router-link>
         </Menu>
         <div slot="trigger"></div>
       </Sider>

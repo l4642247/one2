@@ -7,6 +7,7 @@ import Login from '@/pageadmin/login'
 import ArticleForm from '@/components/articleform'
 import ArticleEdit from '@/components/articleedit'
 import ContentCard from '@/components/contentcard'
+import Test from '@/components/test'
 import Admin from '@/page/admin'
 
 
@@ -49,6 +50,11 @@ export default new Router({
       path: '/content/:id',
       name: 'Content',
       component: Content
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: Test
     },
     {
       path: '/55148917',

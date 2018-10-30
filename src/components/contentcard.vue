@@ -5,8 +5,8 @@
       <p class="time"> <Icon type="md-calendar" size="16"/> &nbsp;{{ item.date }}</p>
       <div class="content" v-html="item.summary"></div>
       <div class="sub">
-        <div class="left"><router-link :to="'/content/' + item.id"><Icon type="ios-heart" size="16"/></router-link>&nbsp;{{ item.agreeNum }}</div>
-        <div class="right"><Icon type="md-thermometer" size="16"/>&nbsp;{{ item.replyNum }}℃&nbsp;&nbsp;<router-link :to="'/content/' + item.id"><Icon type="md-text" size="16"/>&nbsp;{{ item.clickNum }}&nbsp;Replies</router-link></div>
+        <div class="left"><Icon type="ios-heart" class="heart" size="16" @click="addAgree(item.id, 0)"/>{{ item.agreeNum }}</div>
+        <div class="right"><Icon type="md-thermometer" size="16"/>&nbsp;{{ item.clickNum }}℃&nbsp;&nbsp;<router-link :to="'/content/' + item.id"><Icon type="md-text" size="16"/>&nbsp;{{ item.replyNum }}&nbsp;Replies</router-link></div>
       </div>
     </Card>
   </div>
@@ -55,6 +55,11 @@
           this.currentPage += 1
         })
       },
+      addAgree(id, type){
+        this.$api.get('article/addAgree/' + id + '/'+ type, null, r => {
+          alert(r.resData);
+        })
+      }
     }
   }
 </script>
@@ -63,4 +68,10 @@
 <style scoped>
   @import '../../static/css/article.css';
   @import '../../static/css/m.css';
+  .heart{
+    color: #a7a7a7;
+  }
+  .heart:hover{
+    color: #fd6262;
+  }
 </style>

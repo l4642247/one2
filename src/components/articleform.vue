@@ -9,7 +9,7 @@
       </FormItem>
       <FormItem label="分类">
         <Select v-model="formItem.class">
-          <Option v-for="item in list" :value="item.id" :key="item.id">{{item.typename}}</Option>
+          <Option v-for="item in list" :value="item.id" :label="item.typename"></Option>
         </Select>
       </FormItem>
       <FormItem label="公开">
@@ -58,7 +58,7 @@
         formItem: {
           content:'[s-start]<br>something<br>[s-end]',
           title: '',
-          class: '',
+          class: 11,
           display: 'male',
         },
       }
@@ -125,7 +125,8 @@
         if(typeof this.artid != 'undefined') {
           this.$api.get('article/content/' + this.artid, null, r => {
             this.formItem.title = r.resData.title
-            this.editor.setValue(r.resData.content);
+            this.editor.setValue(r.resData.content)
+            this.formItem.class = r.resData.type
           })
         }
       }
