@@ -3,9 +3,9 @@
       <div class="notice">
         <h1><router-link :to="'/'">独白</router-link></h1>
         <ul>
-          <li><router-link :to="'/'"><Icon type="ios-alert-outline" size="14"/>&nbsp;关于</router-link></li>
-          <li><router-link :to="'/'"><Icon type="md-clipboard" size="14"/>&nbsp;留言</router-link></li>
-          <li><router-link :to="'/'"><Icon type="ios-link" size="14"/>&nbsp;友链</router-link></li>
+          <li><router-link :to="'/about'"><Icon type="ios-alert-outline" size="14"/>&nbsp;关于</router-link></li>
+          <li><router-link :to="'/board'"><Icon type="md-clipboard" size="14"/>&nbsp;留言</router-link></li>
+          <li><router-link :to="'/friend'"><Icon type="ios-link" size="14"/>&nbsp;友链</router-link></li>
         </ul>
       </div>
     </div>
@@ -19,7 +19,6 @@
 
 <style scoped>
   .header{
-    width:100%;
     overflow: auto;
     background-color: #f5f5f5;
   }

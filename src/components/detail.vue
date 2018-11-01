@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <Card class="card" dis-hover>
-    <h5>{{ article.title }}</h5>
-    <p class="time"> <Icon type="md-calendar" size="16"/> &nbsp;{{ article.date }}</p>
-    <div class="content" v-html="article.content"></div>
+  <Card class="card bdwidth" dis-hover>
+  <h5>{{ article.title }}</h5>
+  <p class="time"> <Icon type="md-calendar" size="16"/> &nbsp;{{ article.date }}</p>
+  <div class="content" v-html="article.content"></div>
     <div class="sub">
-      <div class="left"><router-link :to="'/content/' + article.id"><Icon type="ios-heart" size="16"/></router-link>&nbsp;{{ article.agreeNum }}</div>
+      <div class="left"><Icon type="ios-heart" v-bind:class="[article.likesbefore ? 'clicked':'notClicked']" size="16" @click="addAgree(article.id, 0)"/>&nbsp;{{ article.agreeNum }}</div>
       <div class="right"><Icon type="md-thermometer" size="16"/>&nbsp;{{ article.clickNum }}℃&nbsp;&nbsp;<router-link :to="'/content/' + article.id"><Icon type="md-text" size="16"/>&nbsp;{{ article.replyNum }}&nbsp;Replies</router-link></div>
     </div>
-    </Card>
-  </div>
+  </Card>
 </template>
 
 <script>
@@ -64,6 +62,17 @@
           }
           return "";
         },
+        addAgree(id, type, index){
+          this.$api.get('article/addAgree/' + id + '/'+ type, null, r => {
+            if(r.resData == 1){
+              this.$Message.success('谢谢点赞！');
+              this.article.agreeNum += 1
+              this.article.likesbefore = true
+            }else{
+              this.$Message.warning('太客气了！');
+            }
+          })
+        },
       }
     }
 </script>
@@ -71,4 +80,20 @@
 <style scoped>
   @import '../../static/css/article.css';
   @import '../../static/css/m.css';
+  .notClicked{
+    color: #a7a7a7;
+  }
+  .notClicked:hover{
+    color: #fd6262;
+  }
+  .clicked{
+    color: #fd6262;
+  }
+  .cardpage{
+    padding-top: 100px;
+  }
+  .card{
+    margin-top: 0px;
+    padding-top: 60px;
+  }
 </style>

@@ -12,12 +12,10 @@
 
 <style scoped>
   .footer{
-    height: 50px;
     width: 100%;
     background-color: #f5f5f5;
     line-height: 50px;
     text-align: center;
-    margin-top: 30px;
   }
   @media screen and (max-width: 768px){
     .show{

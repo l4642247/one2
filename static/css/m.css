@@ -1,4 +1,6 @@
 @charset "utf-8";
+.bdwidth{width: 680px;}
+
 @media screen and (min-width: 1024px) and (max-width: 1199px) {
 }
 @media screen and (min-width: 960px) and (max-width: 1023px) {
@@ -7,15 +9,17 @@
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {
   /* article */
-  .card {width: 90%;}
+  .bdwidth{width: 90%;}
   .content{font-size: 1.5em;}
   .card h5{font-size: 2em;}
-  .sub .time{font-size: 1000px;}
+  .time {font-size: 2em;}
+  .sub {font-size: 2em;}
 }
 @media only screen and (max-width: 479px) {
   /* article */
-  .card {width: 90%;}
+  .bdwidth{width: 90%;}
   .content{font-size: 2em;}
   .card h5{font-size: 3em;}
-  .sub .time{font-size: 1000px;}
+  .time {font-size: 2em;}
+  .sub {font-size: 2em;}
 }

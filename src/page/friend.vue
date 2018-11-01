@@ -1,22 +1,19 @@
 <template>
-  <div>
-    <Header></Header>
-    <div v-bind:style="{'min-height': bdHeight + 'px' }">
-      <ContentCard></ContentCard>
-      <BackTop></BackTop>
+    <div>
+      <Header></Header>
+      <div v-bind:style="{'min-height': bdHeight + 'px' }">
+        friend
+      </div>
+      <Footer></Footer>
     </div>
-    <Footer></Footer>
-  </div>
 </template>
 
 <script>
   import Header from '../components/header.vue'
   import Footer from '../components/footer.vue'
-  import ContentCard from '../components/contentcard.vue'
-  import BackTop from '../components/backtop.vue'
   export default {
-    components: {ContentCard, Header, Footer, BackTop},
-    name: "Index",
+    name: "friend",
+    components: {Header, Footer},
     data () {
       return {
         bdHeight: ''

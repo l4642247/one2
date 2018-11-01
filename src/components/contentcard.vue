@@ -1,14 +1,17 @@
 <template>
-  <div>
-    <Card class="card" v-for="(item, index) in list1" :key="index">
+  <div class="cardpage">
+    <Card class="card bdwidth" v-for="(item, index) in list1" :key="index">
       <h5><router-link :to="'/content/' + item.id">{{ item.title }}</router-link></h5>
       <p class="time"> <Icon type="md-calendar" size="16"/> &nbsp;{{ item.date }}</p>
       <div class="content" v-html="item.summary"></div>
       <div class="sub">
-        <div class="left"><Icon type="ios-heart" class="heart" size="16" @click="addAgree(item.id, 0)"/>{{ item.agreeNum }}</div>
+        <div class="left"><Icon type="ios-heart" v-bind:class="[item.likesbefore ? 'clicked':'notClicked']" size="16" @click="addAgree(item.id, 0, index)"/>&nbsp;{{ item.agreeNum }}</div>
         <div class="right"><Icon type="md-thermometer" size="16"/>&nbsp;{{ item.clickNum }}℃&nbsp;&nbsp;<router-link :to="'/content/' + item.id"><Icon type="md-text" size="16"/>&nbsp;{{ item.replyNum }}&nbsp;Replies</router-link></div>
       </div>
     </Card>
+    <div class="pagediv bdwidth">
+      <Page :total="count" :page-size="pageSize" size="small" show-total @on-change="changepage" />
+    </div>
   </div>
 </template>
 
@@ -16,50 +19,62 @@
   export default {
     data () {
       return {
-        pageSize : 10 , //每页显示20条数据
-        currentPage : 1, //当前页码
+        pageSize : 5 , //每页显示20条数据
+        index : 1, //当前页码
         count : 0, //总记录数
-        list1: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        height: 0,
-        curHeight:0,
+        list1 : [],
+        height : 0,
+        curHeight :0,
       }
     },
-    beforeMount(height) {
-      var h = document.documentElement.clientHeight || document.body.clientHeight;
-      this.curHeight =h - $(".header").height()-1; //减去页面上固定高度height
-      this.getData();
+    beforeMount() {
+      if(this.getCookie('pageIndex') != ''){
+        this.index = this.getCookie('pageIndex')
+      }
+      this.getData(this.index);
     },
     methods: {
-      handleReachBottom () {
-        return new Promise(resolve => {
-          setTimeout(() => {
-            this.addData ();
-            resolve();
-          }, 500);
-        });
+      changepage (index) {
+        this.getData (index);
+        this.setCookie('pageIndex', index , 1)
       },
-      getData () {
-        this.$api.get('article/all?pageSize=' + this.pageSize + '&currentPage=' + this.currentPage, null, r => {
+      getData (index) {
+        this.$api.get('article/all?pageSize=' + this.pageSize + '&currentPage=' + index, null, r => {
           this.list1 = r.resData
           this.count = r.count
-          this.currentPage += 1
         })
       },
-      addData () {
-        this.$api.get('article/all?pageSize=' + this.pageSize + '&currentPage=' + this.currentPage, null, r => {
-          var list = r.resData
-          for (let i = 0; i < list.length; i++) {
-            this.list1.push(list[i]);
-          }
-          this.count = r.count
-          this.currentPage += 1
-        })
-      },
-      addAgree(id, type){
+      addAgree(id, type, index){
         this.$api.get('article/addAgree/' + id + '/'+ type, null, r => {
-          alert(r.resData);
+          if(r.resData == 1){
+            this.$Message.success('谢谢点赞！');
+            this.list1[index].agreeNum += 1
+            this.list1[index].likesbefore = true
+          }else{
+            this.$Message.warning('太客气了！');
+          }
         })
-      }
+      },
+      //设置cookie
+      setCookie: function (cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        console.info(cname + "=" + cvalue + "; " + expires);
+        document.cookie = cname + "=" + cvalue + "; " + expires;
+        console.info(document.cookie);
+      },
+      //获取cookie
+      getCookie: function (cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1);
+          if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+        }
+        return "";
+      },
     }
   }
 </script>
@@ -68,10 +83,18 @@
 <style scoped>
   @import '../../static/css/article.css';
   @import '../../static/css/m.css';
-  .heart{
+  .notClicked{
     color: #a7a7a7;
   }
-  .heart:hover{
+  .notClicked:hover{
     color: #fd6262;
+  }
+  .clicked{
+    color: #fd6262;
+  }
+  .pagediv{
+    margin: 0 auto;
+    padding-top: 80px;
+    padding-bottom: 40px;
   }
 </style>
