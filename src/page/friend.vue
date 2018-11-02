@@ -1,8 +1,7 @@
 <template>
     <div>
       <Header></Header>
-      <div v-bind:style="{'min-height': bdHeight + 'px' }">
-        friend
+      <div v-bind:style="{'min-height': bdHeight + 'px' }"><MyFriend></MyFriend>
       </div>
       <Footer></Footer>
     </div>
@@ -11,9 +10,10 @@
 <script>
   import Header from '../components/header.vue'
   import Footer from '../components/footer.vue'
+  import MyFriend from '../components/myfriend.vue'
   export default {
     name: "friend",
-    components: {Header, Footer},
+    components: {Header, Footer, MyFriend},
     data () {
       return {
         bdHeight: ''

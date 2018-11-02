@@ -1,7 +1,7 @@
 <template>
   <div class="cardpage">
-    <Card class="card bdwidth" v-for="(item, index) in list1" :key="index">
-      <h5><router-link :to="'/content/' + item.id">{{ item.title }}</router-link></h5>
+    <Card class="card bdwidth"  v-for="(item, index) in list1" :key="index">
+      <h5><router-link :to="'/content/' + item.id">{{ item.title + item.type }}</router-link></h5>
       <p class="time"> <Icon type="md-calendar" size="16"/> &nbsp;{{ item.date }}</p>
       <div class="content" v-html="item.summary"></div>
       <div class="sub">
@@ -96,5 +96,9 @@
     margin: 0 auto;
     padding-top: 80px;
     padding-bottom: 40px;
+  }
+
+  .show{
+    display: none;
   }
 </style>

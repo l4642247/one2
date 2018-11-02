@@ -1,12 +1,29 @@
 <template>
     <div class="footer">
-      <p>© 2018-2021. 独白. <span class="show">All Rights Reserved. Lovingly made by yefengs.</span> 湘ICP备15006988号-1</p>
+      <p>&#169;&nbsp;2018-{{year}}. 独白. <span class="show">All Rights Reserved.&nbsp;{{count}}字</span> 湘ICP备15006988号-1</p>
     </div>
 </template>
 
 <script>
     export default {
-        name: "footer"
+      data() {
+        return {
+          year: '',
+          count:''
+        }
+      },
+      mounted() {
+        this.init();
+      },
+      methods: {
+        init() {
+          this.year = new Date().getFullYear()
+          this.$api.get('article/getWordCount', null, r => {
+            this.count = r.resData
+          })
+        },
+      },
+      name: "footer"
     }
 </script>
 

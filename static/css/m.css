@@ -12,14 +12,14 @@
   .bdwidth{width: 90%;}
   .content{font-size: 1.5em;}
   .card h5{font-size: 2em;}
-  .time {font-size: 2em;}
-  .sub {font-size: 2em;}
+  .time {font-size: 1.5em;}
+  .sub {font-size: 1.5em;}
 }
 @media only screen and (max-width: 479px) {
   /* article */
   .bdwidth{width: 90%;}
   .content{font-size: 2em;}
   .card h5{font-size: 3em;}
-  .time {font-size: 2em;}
-  .sub {font-size: 2em;}
+  .time {font-size: 1.5em;}
+  .sub {font-size: 1.5em;}
 }

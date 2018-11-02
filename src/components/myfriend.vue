@@ -18,7 +18,7 @@
     },
     methods: {
       getData() {
-        this.$api.get('article/contentbytype/0', null, r => {
+        this.$api.get('article/contentbytype/2', null, r => {
           r.resData.content = r.resData.content.replace('<p>[s-start]</p>','')
           r.resData.content = r.resData.content.replace('<p>[s-end]</p>','')
           this.article = r.resData
