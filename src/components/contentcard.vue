@@ -1,16 +1,19 @@
 <template>
   <div class="cardpage">
     <Card class="card bdwidth"  v-for="(item, index) in list1" :key="index">
-      <h5><router-link :to="'/content/' + item.id">{{ item.title + item.type }}</router-link></h5>
-      <p class="time"> <Icon type="md-calendar" size="16"/> &nbsp;{{ item.date }}</p>
+      <h5><router-link :to="'/content/' + item.id">{{ item.title}}</router-link></h5>
+      <p class="time" v-if="item.title != ''"> <Icon type="md-calendar" size="16"/> &nbsp;{{ item.date }}</p>
       <div class="content" v-html="item.summary"></div>
       <div class="sub">
         <div class="left"><Icon type="ios-heart" v-bind:class="[item.likesbefore ? 'clicked':'notClicked']" size="16" @click="addAgree(item.id, 0, index)"/>&nbsp;{{ item.agreeNum }}</div>
-        <div class="right"><Icon type="md-thermometer" size="16"/>&nbsp;{{ item.clickNum }}℃&nbsp;&nbsp;<router-link :to="'/content/' + item.id"><Icon type="md-text" size="16"/>&nbsp;{{ item.replyNum }}&nbsp;Replies</router-link></div>
+        <div class="right">
+          <span v-if="item.title != ''"><Icon type="md-thermometer" size="16"/>{{ item.clickNum }}℃&nbsp;&nbsp;<router-link :to="'/content/' + item.id"><Icon type="md-text" size="16"/>&nbsp;{{ item.replyNum }}&nbsp;Replies</router-link></span>
+          <span v-if="item.title == ''"><Icon type="md-calendar" size="16"/> &nbsp;{{ item.date }}</span>
+        </div>
       </div>
     </Card>
     <div class="pagediv bdwidth">
-      <Page :total="count" :page-size="pageSize" size="small" show-total @on-change="changepage" />
+      <Page :total="count" :page-size="pageSize" :current.sync="index" size="small" show-total @on-change="changepage" />
     </div>
   </div>
 </template>
@@ -24,14 +27,17 @@
         count : 0, //总记录数
         list1 : [],
         height : 0,
-        curHeight :0,
+        curHeight : 0,
       }
     },
     beforeMount() {
       if(this.getCookie('pageIndex') != ''){
-        this.index = this.getCookie('pageIndex')
+        this.index = parseInt(this.getCookie('pageIndex'))
       }
       this.getData(this.index);
+    },
+    mounted() {
+      this.setBdHeight();
     },
     methods: {
       changepage (index) {
@@ -96,6 +102,7 @@
     margin: 0 auto;
     padding-top: 80px;
     padding-bottom: 40px;
+    padding-left: 1em;
   }
 
   .show{
