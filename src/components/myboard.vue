@@ -37,4 +37,11 @@
   .card{
     border: 0px;
   }
+
+  >>> .content img{
+    border-radius: 5px;
+    height:auto;
+    max-width:100%;
+    max-height:100%;
+  }
 </style>
